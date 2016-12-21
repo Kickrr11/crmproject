@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
 use Auth;
 use Session;
-use App\Account;
-use App\Note;
-use App\User;
 use Illuminate\Http\Request;
+use repositories\NoteRepoInterface;
 
 class NoteController extends Controller
 {
+
+    private $note;
+
+    public function __construct(NoteRepoInterface $note) {
+        
+        $this->note=$note;
+    }
+    
     public function store (Request $request) {
         
         $v = Validator::make($request->all(), [
@@ -31,34 +37,33 @@ class NoteController extends Controller
 		
 	else  {
             
-          
-			
-           $note= Note::create(array (
- 
-            'description'=>$request->input('description')
-
-           ));
-               
-           
+            $input=$request->all();
+            
+            $this->note->store($input);
 
 	}
-        $accounts=array(Input::get('accountid'));
-        
-        
-        foreach ($accounts as $accountId) {
-            
-           $account = Account::find($accountId);
-           $note->account()->associate($account);
-           
-        }
-        
-        $user = Auth::user();
-        $note->user()->associate($user);
-        $note->save();
+
     }
     
+    public function delete($id) {
+        
+        $note = $this->note->getbyId($id);
+        
+        $remove = $note->destroy();
+        
+        if($remove) {
+            
+           return redirect('accounts')->with('status', 'Contact deleted!');
+ 
+        }
+        
+        else {
+            
+            return array('status'=>'Could not update!');
+            
+        }
+        
+    }
 
-    
-    
 }
 

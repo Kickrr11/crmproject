@@ -7,46 +7,39 @@ use Collective\Html\FormFacade;
 use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
-use Auth;
 use Session;
-use App\Account;
-use App\Country;
-use App\Note;
 use Illuminate\Http\RedirectResponse;
-
+use repositories\AccountRepoInterface;
 
 class AccountController extends Controller {
     
+    public function __construct(AccountRepoInterface $account ) {
+        
+        $this->account=$account;
+    }
+    
     public function index() {
         
-        $accounts = Account::paginate(10);
+        $accounts = $this->account->selectAll();
         
         return View::make('accounts', ['accounts'=>$accounts]);
         
     }
     
     public function show ($id) {
-        
-        $account = Account::find($id);
-        
-         return View::make('accountsview')   
-            ->with('contact', Account::find($id)->contacts()->orderBy('created_at','desc')->paginate(4) )
-            ->with('note', Account::find($id)->notes()->orderBy('created_at','desc')->paginate(4) )
-            ->with ('account', Account::find($id));
-         /*          
-        return View::make('accountsview', ['account' => $account]); 
-  */      
- 
+
+        return View::make('accountsview')   
+           ->with('contact', $this->account->getbyId($id)->contacts()->orderBy('created_at','desc')->paginate(4) )
+           ->with('note', $this->account->getbyId($id)->notes()->orderBy('created_at','desc')->paginate(4) )
+           ->with ('account', $this->account->getbyId($id)); 
     } 
     
     public function create($id=null) {
-        
-        $country= Country::find($id);
+
 	return View::make ('newaccount')
-	->with('title', 'New Issue')
-	->with('country', Country::All()->sortBy('name'));
+	->with('title', 'New Account')
+	->with('country', $this->account->create($id)->sortBy('name'));
     
-       
     }
     
 
@@ -66,43 +59,21 @@ class AccountController extends Controller {
 	}
 		
 	else  {
-			
-           $account=Account::create(array (
-               
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
-            'street'=>$request->input('street'),
-            'city'=>$request->input('city'),
-            'country'=>$request->input('country'),
-            'zip'=>$request->input('zip'),
-            'phone'=>$request->input('phone'),
 
-           ));
-
-	}
-        $countries=array(Input::get('country_id'));
-        
-        
-        foreach ($countries as $countryId) {
-            
-           $country = Country::find($countryId);
-           $account->country()->associate($country);
+           $input = $request->all();
            
-        }
-        $user = Auth::user();
-        $account->user()->associate($user);
-        $account->save();
-        
+           $this->account->store ($input);
+ 
         return redirect('accounts')->with('status', 'Account created!');
 
-        
+        }
         
 			
     }
     
     public function edit ($id) {
         
-        $account = Account::find($id);
+        $account = $this->account->getbyId($id);
          return View::make ('accountedit')->with('account',$account); 
         
     }
@@ -111,7 +82,7 @@ class AccountController extends Controller {
      
         $id = $request->input('id');
         
-        $account= Account::find($id);
+        $account= $this->account->getbyId($id);
  
         if($account){
             

@@ -19,7 +19,6 @@
         
         <th>CreatedAt</th>
 		<th>Last Updated</th>
-		<th>Priority</th>
 		<th>Author </th>
 		<th>Actions </th>
 		
@@ -27,7 +26,7 @@
     </thead>
 	<tbody>
          
-		 <td>{{ $country->id }} </td>
+		<td>{{ $country->id }} </td>
         
 		<td> {{ HTML::linkRoute('countries', $country->name , array($country->id)) }}</td>
 
@@ -36,12 +35,11 @@
 		
         
 		<td> {{ $country->created_at }}</td>
-		<td>   </td>
-		<td>{{$country->user->username}} </td>
+		
+		<td>{{ HTML::linkRoute('users', $country->user->username, array($country->user->id)) }}</td>
 			
 		<td>
-			<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-edit"></i></a>
-			<?=HTML::decode(link_to_route('countryedit', '<i class="glyphicon glyphicon-edit"></i>', array($country->id), ['class' => 'btn btn-sm btn-success pull-right'])) ?></li>
+			{!!HTML::decode(link_to_route('countryedit', '<i class="glyphicon glyphicon-edit"></i>', array($country->id), ['class' => 'btn btn-sm btn-success ']))!!}
 
 		</td>
     @endforeach 

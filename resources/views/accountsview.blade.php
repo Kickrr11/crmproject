@@ -6,7 +6,7 @@
 	  <div class="panel-heading">
         <h3 class="panel-title">Account:{{$account->name}} </h3>
 
-       </div>
+      </div>
 	</div>
 	 
 
@@ -14,7 +14,7 @@
 	<i class="glyphicon glyphicon-remove"></i>
 	</button> 
 	
-		<?=HTML::decode(link_to_route('accountedit', '<i class="glyphicon glyphicon-edit"></i>', array($account->id), ['class' => 'btn btn-sm btn-success pull-right'])) ?></li>
+		{!!HTML::decode(link_to_route('accountedit', '<i class="glyphicon glyphicon-edit"></i>', array($account->id), ['class' => 'btn btn-sm btn-success pull-right']))!!}</li>
 
 
 <!-- Modal -->
@@ -23,7 +23,7 @@
 			<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this issue?</h4>
+				<h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this account?</h4>
 			</div>
 				<div class="modal-body">
 					<form class="elegant-aero"
@@ -61,7 +61,7 @@
         <tr>
   
 			<td>Account  added by user:</td>
-            <td><p>{{ HTML::linkRoute('dashboard', $account->user->username, array($account->user->id)) }}</p></td>
+            <td><p>{{ HTML::linkRoute('users', $account->user->username, array($account->user->id)) }}</p></td>
 
             </tr>
 
@@ -255,11 +255,11 @@
 	<div class="col-sm-5">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<strong> <p>User:{{ $notes->user->username}} </p></strong> <span class="text-muted">{{ $notes->created_at}}</span>
+				<strong> <p>User:{{ HTML::linkRoute('users', $notes->user->username, array($notes->user->id)) }}</p></strong> <span class="text-muted">{{ $notes->created_at}}</span>
 				
 			</div>
 			<div class="panel-body">
-			<?=$notes->description?> 
+			{!!$notes->description!!}
 			
 			</div><!-- /panel-body -->
 		</div><!-- /panel panel-default -->
@@ -268,7 +268,7 @@
 	
 	{{$note->links()}}
 	</div><!-- /col-sm-5 -->
-	
+ 	
 
 <script>tinymce.init({ selector:'textarea' });</script>	
 <script type="text/javascript">
@@ -284,5 +284,5 @@ $('#some-textarea').wysiwyg({
 });
 	</script>
 	
-@endsection  
+@endsection 
    

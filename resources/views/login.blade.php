@@ -1,14 +1,21 @@
 <!doctype html>
 
 <head>
-
-<link rel="stylesheet" href="<?php echo url('css/login.css')?>" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-</head>
-@extends('master')
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
  
-@section('content')
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Optional theme -->
+	<link rel="stylesheet" href="<?php echo asset('css/index.css')?>" type="text/css"> 
+	<link rel="stylesheet" href="<?php echo url('css/login.css')?>" type="text/css"> 
+	<link rel="stylesheet" href="<?php echo asset('bootstrap-wysiwyg-master/index.css')?>" type="text/css">
+	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"> </script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<div class="container">
 
   <div class="row">
 	<div class="col-md-6 col-md-offset-3">
@@ -17,10 +24,10 @@
 				<div class="row">
 					<div class="col-xs-6">
 			
-					<?php echo link_to('login','Login');?>
+				{{ HTML::linkRoute('login','Login')}}
 					</div>
 					<div class="col-xs-6">
-						<?php echo link_to('registration','Register');?>
+						{{ HTML::linkRoute('registration','Register')}}
 					</div>
 				</div>
 				<hr>
@@ -82,61 +89,6 @@
 	</div>
 </body>
  
-    <div class="jumbotron">
-        <h1></h1>
- 
-        <p>HELOOOOOO!!!!</p>
- 
-        <p><a class="btn btn-primary btn-lg" href="#" role="button"> HEKK!</a></p>
-
-
-<div class="well">
-
-
-
-    {!! Form::open(['url' => 'logged', 'class' => 'form-horizontal']) !!}
- 
-    <fieldset>
- 
-        <legend>Legend</legend>
- 
-        <!-- Email -->
-        <div class="form-group">
-            {!! Form::label('email', 'Email:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
-           
-			@if ($errors->first('email'))
-			{{ Form::text('email', null, $attributes = array('class'=>'error')) }}
-			{{ $errors->first('email', '<small class=error>:message</small>') }}
-			@else
-			  {{ Form::text('email') }}
-			@endif
-
-		   </div>
-        </div>
- 
-        <!-- Password -->
-        <div class="form-group">
-            {!! Form::label('password', 'Password:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
-                {!! Form::password('password',['class' => 'form-control', 'placeholder' => 'password', 'type' => 'password']) !!}
-               
-            </div>
-        </div>
- 
-  
- 
-        <!-- Submit Button -->
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
-            </div>
-        </div>
- 
-    </fieldset>
- 
-    {!! Form::close()  !!}
  
 </div>
-
-@endsection
+</div>

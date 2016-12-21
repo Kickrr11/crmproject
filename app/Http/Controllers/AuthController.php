@@ -11,8 +11,17 @@ use Illuminate\Support\MessageBag;
 use Session;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use repositories\UserRepoInterface;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller {
+
+    private $user;
+
+    public function __construct(UserRepoInterface $user) {
+        
+        $this->user=$user;
+    }
     
     public function login() {
         
@@ -73,8 +82,7 @@ class AuthController extends Controller {
                     ->withErrors($errors)
                     ->withInput(Input::except('password'));
        
-            
-            Session::flash('error', 'Username or password doesnt match'); 
+
             return Redirect::to('login');
           
         }
@@ -88,11 +96,12 @@ class AuthController extends Controller {
         
     }
     
-    public function createRegistration() {
+
+    public function createRegistration(Request $request) {
         
         $input=array(
 		
-            'name'=>Input::get('username'),
+            'username'=>Input::get('username'),
             
             /*do hash password */
             'password'=>Input::get('password'),
@@ -102,7 +111,7 @@ class AuthController extends Controller {
         
         $validator = Validator::make($input, array (
             
-            'name' => 'required|unique:users',
+            'username' => 'required|unique:users',
             'password' => 'required|min:3',
             
             'email' => 'required|email|unique:users'
@@ -120,13 +129,9 @@ class AuthController extends Controller {
         
         else {
             
-            User::create(array (
-                
-                'name' => Input::get ('username'),
-                'password'=>Input::get ('password'),
-                'email'=>Input::get ('email')
- 
-            )); 
+           $input = $request->all();
+           
+           $this->user->store ($input);
             
             
             

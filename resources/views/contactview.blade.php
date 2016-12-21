@@ -39,7 +39,7 @@
                     </tr>
 					<tr>
                         <td>Added by user</td>
-                        <td> <p>{{ HTML::linkRoute('contview', $contact->user->username, array($contact->user_id)) }}</p>
+                        <td> <p>{{ HTML::linkRoute('users', $contact->user->username, array($contact->user->id)) }}</p>
 						</td>
                     </tr>
 					
@@ -119,7 +119,7 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => 'contdel', 'class' => 'elegant-aero']) !!}
 					
-						<?=Form::token() ?> 
+					{!!Form::token() !!} 
 		
 						{{ Form::hidden('contactid',$value=$contact->id) }}
 						

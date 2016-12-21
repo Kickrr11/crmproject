@@ -63,8 +63,25 @@ span.glyphicon {
 		border-width:0;
 	}
 
-	.dropdown-menu {
-		min-width: 250px;
+	ul.dropdown-menu {
+		
+		
+		
+	}
+	
+	.navuser{
+		
+		width: 305px;
+		padding: 10px;
+		padding-bottom: 0px;
+		
+	}
+	
+	.navbar-login-session {
+
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 	}
 
 	.accordion-heading .accordion-toggle, .accordion-inner, .nav-stacked li > a {

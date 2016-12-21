@@ -16,7 +16,7 @@ class HomeController extends Controller {
     public function hello() {
         
     $users = User::all();
-    $latestActivities = Activity::with('user')->latest()->limit(20)->get();    
+    $latestActivities = Activity::with('user')->latest()->limit(20)->paginate(5);    
     
         return View::make('dashboard')->with('latestactivity',$latestActivities);   
 

@@ -26,7 +26,7 @@ class CountriesController extends Controller {
         $country = Country::find($id);
                     
         return View::make('countriesview', ['country' => $country])
-             ->with('account', Country::find($id)->account()->orderBy('created_at','desc')->paginate(4) ); 
+             ->with('account', Country::find($id)->account()->orderBy('created_at','desc')->paginate(10) ); 
 
     } 
     

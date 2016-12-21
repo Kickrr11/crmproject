@@ -41,11 +41,10 @@
 		<td> {{ HTML::linkRoute('countries', $account->countries->name, array($account->countries->id)) }} </td>
 		<td>{{$account->user->username}} </td>
 			
-		<td>
-			<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-edit"></i></a>
-			<?=HTML::decode(link_to_route('countryedit', '<i class="glyphicon glyphicon-edit"></i>', array($account->id), ['class' => 'btn btn-sm btn-success pull-right'])) ?></li>
+		
+		<td>{!!HTML::decode(link_to_route('accountedit', '<i class="glyphicon glyphicon-edit"></i>', array($account->id), ['class' => 'btn btn-sm btn-success '])) !!}</td>
 
-		</td>
+		
     @endforeach 
     </tbody>
   </table>

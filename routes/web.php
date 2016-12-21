@@ -52,6 +52,25 @@ Route::get('accounts/{id}',
 
     ); 
 
+Route::get('users/{id}',
+        array('as'=>'users',
+        'uses'=> 'UserController@show')
+
+    ); 
+
+Route::get('useredit/{id}',
+        array('as'=>'useredit',
+        'uses'=> 'UserController@edit')
+
+    ); 
+
+Route::any('userupdate/{id?}',
+        array('as'=>'userupdate',
+        'uses'=> 'UserController@update')
+
+    ); 
+
+
 Route::post('contcreate',
   array('as'=>'contcreate',
         'uses'=> 'ContactController@store'

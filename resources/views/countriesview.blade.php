@@ -1,8 +1,7 @@
 @extends('master')
  
 @section('content')
-{{$country->id}}
-{{$country->name}}
+
 
 	<div class="panel panel-info">
 		<div class="panel-heading">
@@ -43,7 +42,7 @@
 			<th>CreatedAt</th>
 			<th>Last Updated</th>
 			<th>Author</th>
-			<th>Probability</th>
+			
 		  </tr>
 		</thead>
 		<tbody>
@@ -58,7 +57,7 @@
 			<td>{{$accounts->updated_at}}</td>
 			<td>{{ HTML::linkRoute('accounts', $accounts->user->username , array($accounts->id)) }}
 			</td>
-			<td> </td>
+			
 		
 		</tbody>
 		@endforeach

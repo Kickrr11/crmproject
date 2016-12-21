@@ -7,22 +7,22 @@
         {{ session('status') }}
     </div>
 @endif
-	{!! Form::open(['url' => 'countryupdate', 'class' => 'form-horizontal']) !!}
+	{!! Form::open(['url' => 'userupdate', 'class' => 'form-horizontal']) !!}
 		{!!Form::token()!!}
     <fieldset>
  
-        <legend>Edit Country:</legend>
+        <legend>Edit User:</legend>
  
         <!-- Email -->
         <div class="form-group">
-            {!! Form::label('name', 'Country Name:', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('name', 'Username:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
            
 			@if ($errors->first('email'))
 				{{ Form::text('email', null, $attributes = array('class'=>'error')) }}
 				{{ $errors->first('email', '<small class=error>:message</small>') }}
 			@else
-				{{ Form::text('name',$value=$country->name,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
+				{{ Form::text('username',$value=$user->username,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
 			@endif
 
 		   </div>
@@ -32,15 +32,15 @@
  
         <!-- Password -->
         <div class="form-group">
-            {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
+            {!! Form::label('email', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::text('description',$value=$country->description,['class' => 'form-control', 'placeholder' => 'Description', 'type' => 'text']) !!}
+                {!! Form::text('email',$value=$user->email,['class' => 'form-control', 'placeholder' => 'Description', 'type' => 'text']) !!}
                
             </div>
         </div>
 	
         <!-- Select Multiple -->
-		<input type="hidden" name="id" value=<?=$country->id?> >
+		<input type="hidden" name="id" value=<?=$user->id?> >
  
         <!-- Submit Button -->
         <div class="form-group">

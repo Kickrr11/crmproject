@@ -7,12 +7,19 @@ use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
 use Auth;
 use Session;
-use App\Account;
-use App\Contact;
 use Illuminate\Http\Request;
+use repositories\ContactRepoInterface;
 
 class ContactController extends Controller
 {
+
+    private $contact;
+
+    public function __construct(ContactRepoInterface $contact ) {
+        
+        $this->contact=$contact;
+    }
+    
     public function store (Request $request) {
         
         $v = Validator::make($request->all(), [
@@ -29,48 +36,22 @@ class ContactController extends Controller
             return Redirect::back()->witherrors($v);
 			
             $errors = $v->errors();
-
-            
-			
+	
 	}
 		
 	else  {
-			
-           $contact= Contact::create(array (
-               
-            'firstname'=>$request->input('firstname'),
-            'lastname'=>$request->input('lastname'),
-            'phone'=>$request->input('phone'),
-            'email'=>$request->input('email'),
-            'skype'=>$request->input('skype'),
-            'company'=>$request->input('company')
-
-           ));
-               
-           
-
-	}
-        $accounts=array(Input::get('accountid'));
-        
-        
-        foreach ($accounts as $accountId) {
             
-           $account = Account::find($accountId);
-           $contact->account()->associate($account);
+           $input = $request->all();
            
-        }
-        
-        $user = Auth::user();
-        $contact->user()->associate($user);
-        
-        
-        $contact->save();
+           $this->contact->store ($input);
+
  
-    }
+        }
+    }    
     
     public function show ($id=null) {
         
-        $contact = Contact::find($id);
+        $contact = $this->contact->getbyId($id);
         
         return View::make ('contactview')
                 ->with ('contact',$contact);
@@ -79,17 +60,16 @@ class ContactController extends Controller
     
     public function edit ($id) {
         
-        $contact = Contact::find($id);
+        $contact = $this->contact->getbyId($id);
          return View::make ('contactedit')->with('contact',$contact); 
-        
+         
     }
-    
-    
+
     public function update (Request $request,$id=null) {
      
         $id = $request->input('id');
         
-        $contact= Contact::find($id);
+        $contact= $this->contact->getbyId($id);
  
         if($contact){
             
@@ -110,14 +90,13 @@ class ContactController extends Controller
     public function destroy(Request $request,$id=null) {
         
         $id = $request->input('contactid');
-        $remove =Contact::find($id);
-        $remove->delete();
+        $remove =$this->contact->destroy($id);
+        
         
         if($remove) {
             
            return redirect('accounts')->with('status', 'Contact deleted!');
-            
-            
+ 
         }
         
         else {
