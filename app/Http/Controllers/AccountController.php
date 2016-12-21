@@ -29,8 +29,8 @@ class AccountController extends Controller {
     public function show ($id) {
 
         return View::make('accountsview')   
-           ->with('contact', $this->account->getbyId($id)->contacts()->orderBy('created_at','desc')->paginate(4) )
-           ->with('note', $this->account->getbyId($id)->notes()->orderBy('created_at','desc')->paginate(4) )
+           ->with('contact', $this->account->contacts($id) )
+           ->with('note', $this->account->notes($id))
            ->with ('account', $this->account->getbyId($id)); 
     } 
     

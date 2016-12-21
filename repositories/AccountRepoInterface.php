@@ -15,5 +15,9 @@ interface AccountRepoInterface {
 	public function update($id=null);
 	
 	public function destroy($id);
+        
+        public function contacts($id);
+        
+        public function notes($id);
 	
 }

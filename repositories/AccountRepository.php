@@ -71,6 +71,22 @@ class AccountRepository implements AccountRepoInterface {
         return $account->delete();
         
     }
+    
+    public function contacts ($id) {
+        
+        $account= Account::find($id);
+        
+        return $account->contacts()->orderBy('created_at','desc')->paginate(4);
+        
+    }
+    
+        public function notes ($id) {
+        
+        $account= Account::find($id);
+        
+        return $account->notes()->orderBy('created_at','desc')->paginate(4);
+        
+    }
 
 
 }
