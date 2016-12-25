@@ -3,6 +3,7 @@
 @section('content')
 @if (session('status'))
     <div class="alert alert-success">
+		<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true" style="color:white">×</span></button>
         {{ session('status') }}
     </div>
 @endif
@@ -28,7 +29,7 @@
          
 		<td>{{ $country->id }} </td>
         
-		<td> {{ HTML::linkRoute('countries', $country->name , array($country->id)) }}</td>
+		<td> {!! HTML::linkRoute('countries', $country->name , array($country->id)) !!}</td>
 
 		
         <td> {{ $country->created_at }} </td>

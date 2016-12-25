@@ -49,6 +49,10 @@ class NoteRepository implements NoteRepoInterface {
 
     public function update($id = null) {
         
+        $note = Note::find($id);
+        
+        return $note->save();
+        
     }
     
     public function destroy($id) {

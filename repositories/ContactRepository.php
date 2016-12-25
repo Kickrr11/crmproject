@@ -60,6 +60,10 @@ class ContactRepository implements ContactRepoInterface {
 
     public function update($id = null) {
         
+        $contact = Contact::find($id);
+        
+        return $contact->save();
+        
     }
     
     public function destroy($id) {

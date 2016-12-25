@@ -61,7 +61,9 @@ class AccountRepository implements AccountRepoInterface {
 
     public function update($id = null) {
         
-
+        $account = Account::find($id);
+        
+        return $account->save();
     }
     
     public function destroy($id) {

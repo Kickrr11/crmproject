@@ -20,7 +20,10 @@ class BackendServiceProvider extends ServiceProvider {
             ('repositories\\UserRepoInterface', 'repositories\\UserRepository');   
         
         $this->app->bind
-            ('repositories\\NoteRepoInterface', 'repositories\\NoteRepository'); 
+            ('repositories\\NoteRepoInterface', 'repositories\\NoteRepository');
+        
+        $this->app->bind
+            ('repositories\\CountryRepoInterface', 'repositories\\CountryRepository'); 
 
     }
     

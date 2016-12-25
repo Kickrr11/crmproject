@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e16ad9b7cad3eee1ac741791dc8cc5e2",
-    "content-hash": "25e028ab47fe9ef4b521de6fca130b28",
+    "hash": "c61fbde5fa594d2a68c0259317c32d37",
+    "content-hash": "676d56731fe5d4b07d170f3808649750",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2223,6 +2223,55 @@
                 "dump"
             ],
             "time": "2016-11-03 08:04:31"
+        },
+        {
+            "name": "torann/laravel-asana",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Torann/laravel-asana.git",
+                "reference": "6f6cffaa1cfa69f3e0c6445e9e03505f81e89772"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Torann/laravel-asana/zipball/6f6cffaa1cfa69f3e0c6445e9e03505f81e89772",
+                "reference": "6f6cffaa1cfa69f3e0c6445e9e03505f81e89772",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Torann\\LaravelAsana\\": "src/Torann/LaravelAsana"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Stainback",
+                    "email": "daniel@lyften.com"
+                }
+            ],
+            "description": "Asna API wrapper for Laravel",
+            "keywords": [
+                "Laravel 4",
+                "asana",
+                "laravel",
+                "laravel 5"
+            ],
+            "time": "2016-04-13 16:44:03"
         },
         {
             "name": "vlucas/phpdotenv",

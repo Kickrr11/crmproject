@@ -2,14 +2,12 @@
 
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Collective\Html\FormFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
 use Illuminate\Support\MessageBag;
 use Session;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use repositories\UserRepoInterface;
 use Illuminate\Http\Request;
@@ -101,11 +99,11 @@ class AuthController extends Controller {
         
         $input=array(
 		
-            'username'=>Input::get('username'),
+            'username'=>$request->input('username'),
             
             /*do hash password */
-            'password'=>Input::get('password'),
-            'email'=>Input::get('email')
+            'password'=>$request->input('password'),
+            'email'=>$request->input('email')
 	
         );
         

@@ -2,6 +2,12 @@
  
 @section('content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+		<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true" style="color:white">×</span></button>
+        {{ session('status') }}
+    </div>
+@endif
 
 	<div class="panel panel-info">
 		<div class="panel-heading">
@@ -12,22 +18,6 @@
 		
 	</div>
 
-    <div class="row">
-	
-	
-		<div class=".col-xs-3 .col-sm-4 ">
-			<div class="picture">
-			</div>
-		</div>
-	
-		<div class=".col-xs-3 .col-sm-4">
-		
-		</div>
-	  
-
-	
-	
-	</div>
     
     
      <h3> Accounts for this country </h3>
@@ -38,7 +28,7 @@
 		
 		  <tr>
 			<th>#</th>
-			<th>IssueName</th>
+			<th>AccountName</th>
 			<th>CreatedAt</th>
 			<th>Last Updated</th>
 			<th>Author</th>

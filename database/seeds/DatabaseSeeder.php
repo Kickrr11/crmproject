@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Country;
+use Faker\Factory as Faker;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,9 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-		$this->call('CountryTableSeeder');
+		
+		Model::unguard();
 
-        $this->command->info('User table seeded!');	
+		$this->call('CountryTableSeeder');
+		$this->call('UserTableSeeder');
+		$this->call('AccountTableSeeder');
+		$this->call('NoteTableSeeder');
+		$this->call('ContactTableSeeder');
+		
     }
 }
 
@@ -24,7 +32,12 @@ class CountryTableSeeder extends Seeder {
     {
         DB::table('countries')->delete();
 
-        Country::create(['name' => 'China', 'description' => 'Asia']);
+        Country::create(['name' => 'China', 'user_id'=>1, 'description' => 'Asia']);
     }
 
 }
+
+
+
+
+

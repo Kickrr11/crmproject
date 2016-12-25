@@ -121,6 +121,12 @@ Route::any('accountupdate/{id?}',
 
     ); 
 
+Route::any('accountdelete/{id?}',
+        array('as'=>'accountdelete',
+        'uses'=> 'AccountController@destroy')
+
+    ); 
+
 
 Route::group(['middleware' => ['auth']], function () {    
     Route::any('logout',

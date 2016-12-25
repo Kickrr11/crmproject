@@ -10,12 +10,20 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\Country;
+use repositories\CountryRepoInterface;
 
 class CountriesController extends Controller {
+
+    private $country;
+
+    public function __construct(CountryRepoInterface $country ) {
+        
+        $this->country=$country;
+    }
     
     public function index() {
         
-        $countries = Country::paginate(10);
+        $countries = $this->country->selectAll();
         
         return View::make('countries', ['countries'=>$countries]);
         
@@ -26,7 +34,7 @@ class CountriesController extends Controller {
         $country = Country::find($id);
                     
         return View::make('countriesview', ['country' => $country])
-             ->with('account', Country::find($id)->account()->orderBy('created_at','desc')->paginate(10) ); 
+             ->with('account',$this->country->account($id)); 
 
     } 
     
@@ -53,19 +61,13 @@ class CountriesController extends Controller {
 	}
 		
 	else  {
-			
-           $country=Country::create(array (
-               
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
- 
-           ));
+      
+           $input = $request->all();
+           
+           $this->country->store ($input);
 
 	}
 
-        $user = Auth::user();
-        $country->user()->associate($user);
-        $country->save();
         
         return redirect('countries')->with('status', 'Country created!');
 		
@@ -73,8 +75,8 @@ class CountriesController extends Controller {
     
     
     public function edit ($id) {
-        
-        $country = Country::find($id);
+    
+        $country = $this->country->getbyId($id);
          return View::make ('countryedit')->with('country',$country); 
         
     }
@@ -83,14 +85,14 @@ class CountriesController extends Controller {
      
         $id = $request->input('id');
         
-        $country= Country::find($id);
+        $country= $this->country;
  
         if($country){
             
             $country->name    = $request->input('name');
             $country->description  = $request->input('description');
  
-            if($country->save()){
+            if($country->update($id)){
                return redirect('countries')->with('status', 'Country updated!');
             }else{
                return array('status'=>'Could not update!');
@@ -104,8 +106,8 @@ class CountriesController extends Controller {
     public function destroy(Request $request,$id=null) {
         
         $id = $request->input('countryid');
-        $remove =Contact::find($id);
-        $remove->delete();
+        
+        $remove=$this->country->destroy($id);
         
         if($remove) {
             

@@ -4,14 +4,15 @@
 
 @if (session('status'))
     <div class="alert alert-success">
+		<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true" style="color:white">×</span></button>
         {{ session('status') }}
     </div>
 @endif
 
 
-      @foreach ($accounts as $account)
+      
 		<table class="table table-striped">
-		
+		@foreach ($accounts as $account)
    
 	<thead>
 	
@@ -39,12 +40,11 @@
         
 		<td> {{ $account->created_at }}</td>
 		<td> {{ HTML::linkRoute('countries', $account->countries->name, array($account->countries->id)) }} </td>
-		<td>{{$account->user->username}} </td>
+		<td>{{ HTML::linkRoute('users', $account->user->username, array($account->user->id)) }} </td>
 			
 		
 		<td>{!!HTML::decode(link_to_route('accountedit', '<i class="glyphicon glyphicon-edit"></i>', array($account->id), ['class' => 'btn btn-sm btn-success '])) !!}</td>
 
-		
     @endforeach 
     </tbody>
   </table>

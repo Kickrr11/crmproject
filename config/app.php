@@ -180,6 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
 		repositories\BackendServiceProvider::class,
+		\Torann\LaravelAsana\ServiceProvider::class,
+
 
 
     ],
@@ -234,6 +236,7 @@ return [
 		'Input' => Illuminate\Support\Facades\Input::class,
 		'Activity' => Regulus\ActivityLog\Models\Activity::class,
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
+		'Asana' => 'Torann\LaravelAsana\Facade',
 
 		
 

@@ -55,7 +55,7 @@ return [
 		 'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'larblade',
+            'database'  => 'test44',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',

@@ -82,20 +82,40 @@ class AccountController extends Controller {
      
         $id = $request->input('id');
         
-        $account= $this->account->getbyId($id);
+        $account= $this->account;
  
         if($account){
             
             $account->name    = $request->input('name');
             $account->description  = $request->input('description');
  
-            if($account->save()){
-               return redirect('accounts')->with('status', 'Account updated!');
+            if($account->update($id)){
+               return redirect()->route('accounts',$id)->with('status', 'Account updated!');
             }else{
                return array('status'=>'Could not update!');
             }
         }
         return array('status'=>'Could not find Account!');
 
+    }
+    
+    public function destroy(Request $request,$id=null) {
+        
+        $id = $request->input('accountid');
+        
+        $remove=$this->account->destroy($id);
+        
+        if($remove) {
+            
+           return redirect('accounts')->with('status', 'Account deleted!');
+
+        }
+        
+        else {
+            
+            return array('status'=>'Could not delete!');
+    
+        }
+        
     }
 }

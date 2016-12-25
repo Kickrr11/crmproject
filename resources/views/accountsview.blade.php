@@ -2,6 +2,13 @@
  
 @section('content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+		<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true" style="color:white">×</span></button>
+        {{ session('status') }}
+    </div>
+@endif
+
 	<div class="panel panel-info">
 	  <div class="panel-heading">
         <h3 class="panel-title">Account:{{$account->name}} </h3>
@@ -26,7 +33,9 @@
 				<h4 class="modal-title" id="myModalLabel">Are you sure you want to delete this account?</h4>
 			</div>
 				<div class="modal-body">
-					<form class="elegant-aero"
+					{!! Form::open(['url' => 'accountdelete', 'class' => 'elegant-aero']) !!}
+					
+					{!!Form::token() !!} 
 		
 		
 						{{ Form::hidden('accountid', $account->id) }}
@@ -40,7 +49,7 @@
 			<div class="modal-footer">
 			
 			</div>
-					</form>
+					{!! Form::close()  !!}
 		</div>
   </div>
 
@@ -124,8 +133,9 @@
 			
             <td>	@foreach ($contact as $contacts)
 				<p>{{ HTML::linkRoute('contview', $contacts->firstname, array($contacts->id)) }}</p>
-
+					
 				@endforeach
+				{{$contact->links()}}
 			</td>
           </tr> 
 

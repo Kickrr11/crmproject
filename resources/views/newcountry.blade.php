@@ -24,7 +24,7 @@
 				{{ Form::text('name', null, $attributes = array('class'=>'form-control')) }}
 				{{ $errors->first('name') }}
 			@else
-				{{ Form::text('name',$value=null,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
+				{{ Form::text('name',$value=null,['class' => 'form-control', 'placeholder' => 'Country Name', 'type' => 'text']) }}
 			@endif
 
 		   </div>

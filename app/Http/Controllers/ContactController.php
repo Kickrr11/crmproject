@@ -44,7 +44,9 @@ class ContactController extends Controller
            $input = $request->all();
            
            $this->contact->store ($input);
-
+               
+           return redirect()->back()->with('status', 'Contact created!');
+               
  
         }
     }    
@@ -69,15 +71,15 @@ class ContactController extends Controller
      
         $id = $request->input('id');
         
-        $contact= $this->contact->getbyId($id);
+        $contact= $this->contact;
  
         if($contact){
             
             $contact->firstname    = $request->input('firstname');
             $contact->lastname  = $request->input('lastname');
  
-            if($contact->save()){
-               return redirect('accounts')->with('status', 'Contact updated!');
+            if($contact->update($id)){
+               return redirect()->back()->with('status', 'Contact updated!');
             }else{
                return array('status'=>'Could not update!');
             }

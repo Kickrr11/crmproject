@@ -40,20 +40,20 @@ class NoteController extends Controller
             $input=$request->all();
             
             $this->note->store($input);
+            
+            return redirect()->back()->with('status', 'Note created!');
 
 	}
 
     }
     
     public function delete($id) {
-        
-        $note = $this->note->getbyId($id);
-        
-        $remove = $note->destroy();
+
+        $remove = $this->note->destroy($id);
         
         if($remove) {
             
-           return redirect('accounts')->with('status', 'Contact deleted!');
+           return redirect()->back()->with('status', 'Contact deleted!');
  
         }
         
