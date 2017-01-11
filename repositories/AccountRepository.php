@@ -1,13 +1,16 @@
 <?php 
+
 namespace repositories;
+
 use App\Account;
 use App\Country;
+use App\Contact;
+use App\Note;
 use Validator, Input, Redirect; 
 use Auth;
 
 class AccountRepository implements AccountRepoInterface {
-	
-    
+
     public function selectAll() {
        
         return Account::paginate(10);
@@ -40,13 +43,10 @@ class AccountRepository implements AccountRepoInterface {
            
         }
         $user = Auth::user();
-        var_dump ($user);
+        
         $account->user()->associate($user);
         $account->save();
 
-        
-       
-        
     }
 	
 
@@ -56,14 +56,11 @@ class AccountRepository implements AccountRepoInterface {
         
     }
 
+    public function update($id = null,array $data) {
 
-
-
-    public function update($id = null) {
-        
         $account = Account::find($id);
         
-        return $account->save();
+        return $account->fill($data)->save();
     }
     
     public function destroy($id) {
@@ -81,14 +78,71 @@ class AccountRepository implements AccountRepoInterface {
         return $account->contacts()->orderBy('created_at','desc')->paginate(4);
         
     }
+
     
-        public function notes ($id) {
+    public function notes ($id) {
         
         $account= Account::find($id);
         
         return $account->notes()->orderBy('created_at','desc')->paginate(4);
         
     }
+    //API method
+    public function shownotes ($accountId,$noteId) {
+        
+        $account= Account::find($accountId);
+        $note= Note::find($noteId);
+        
+        $accounts= $account->notes()->get()->find($note);
+        
+        return $accounts;
+        
+    }
+    
+    //API method returns contact for account fractal
 
+    public function accCont($id) {
+        
+        $account= Account::find($id);
+        
+        return $account;
+        
+    }
+    //API method returns note for account fractal  
+    
+    public function accNote($id) {
+        
+        $account= Account::find($id);
+        
+        return $account;
+        
+    }
+    
+    //API method returns contact for account fractal
+    
+    //API method
+    public function showContacts ($accountId,$contactId) {
+        
+        $account= Account::find($accountId);
+        $contact= Contact::find($contactId);
+        
+        $accounts= $account->contacts()->get()->find($contact);
+        
+        return $accounts;
+        
+    }
+    // method for returning all accounts with contacts for 
+    /*
+    public function apiAccountContacts($id) {
+        $account = Account::find($id);
+        return $account::with('contacts')->get(); 
+    }
+    */
+
+    public function search($query) {
+        
+        return Account::search($query);
+        
+    }
 
 }

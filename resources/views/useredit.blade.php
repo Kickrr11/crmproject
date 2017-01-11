@@ -7,7 +7,8 @@
         {{ session('status') }}
     </div>
 @endif
-	{!! Form::open(['url' => 'userupdate', 'class' => 'form-horizontal']) !!}
+	 {{ Form::open(array('route' => array('userupdate', $user->id, ),'files'=>'true','class' => 'form-horizontal')) }} 
+
 		{!!Form::token()!!}
     <fieldset>
  
@@ -36,6 +37,14 @@
             <div class="col-lg-10">
                 {!! Form::text('email',$value=$user->email,['class' => 'form-control', 'placeholder' => 'Description', 'type' => 'text']) !!}
                
+            </div>
+        </div>
+		
+		<div class="form-group">
+            {!! Form::label('pic', 'Picture:', ['class' => 'col-lg-2 control-label']) !!}
+            <div class="col-lg-10">
+				{{$user->pic}}
+               {{Form::file('pic')}}
             </div>
         </div>
 	

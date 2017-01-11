@@ -4,22 +4,67 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Country;
-use App\Note;
-use App\User;
+use Elasticquent\ElasticquentTrait;
 
 use Spatie\Activitylog\LogsActivityInterface;
 use Spatie\Activitylog\LogsActivity;
+
 
 class Account extends Model implements LogsActivityInterface{
     
     use LogsActivity;
     
+    
+    use ElasticquentTrait;
+   
     protected $table='account';
     protected $fillable = [
         'name', 'description','street','city', 'country','zip','phone'
     ];
+ 
+
     
+
+ 
+    protected $indexSettings = [
+        'analysis' => [
+            'char_filter' => [
+                'replace' => [
+                    'type' => 'mapping',
+                    'mappings' => [
+                        '&=> and '
+                    ],
+                ],
+            ],
+            'filter' => [
+                'word_delimiter' => [
+                    'type' => 'word_delimiter',
+                    'split_on_numerics' => false,
+                    'split_on_case_change' => true,
+                    'generate_word_parts' => true,
+                    'generate_number_parts' => true,
+                    'catenate_all' => true,
+                    'preserve_original' => true,
+                    'catenate_numbers' => true,
+                ]
+            ],
+            'analyzer' => [
+                'autocomplete' => [
+                    'type' => 'standard',
+                    'char_filter' => [
+                        'html_strip',
+                        'replace',
+                    ],
+                    'tokenizer' => 'whitespace',
+                    'filter' => [
+                        "standard", "lowercase", "stop", "kstem", "ngram" 
+                    ],
+                ],
+            ],
+        ],
+    ];
+    
+
     public function countries () {
         
         return $this->belongsTo('App\Country','country_id');

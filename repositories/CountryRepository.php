@@ -1,7 +1,8 @@
 <?php 
 namespace repositories;
-use App\User;
+
 use App\Country;
+use App\Account;
 use Validator, Input, Redirect; 
 use Auth;
 
@@ -72,6 +73,23 @@ class CountryRepository implements CountryRepoInterface {
         return $country->account()->orderBy('created_at','desc')->paginate(10);
         
     }
-
+    //API Transformer method
+    
+    public function countryAccounts($id) {
+        
+        return Country::find($id);
+    }
+    
+    //API method
+    public function showAccounts ($countryId,$accountId) {
+        
+        $account= Account::find($accountId);
+        $country= Country::find($countryId);
+        
+        $countries= $country->account()->get()->find($account);
+        
+        return $countries;
+        
+    }
 
 }

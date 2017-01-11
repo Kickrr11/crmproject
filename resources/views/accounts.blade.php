@@ -9,9 +9,14 @@
     </div>
 @endif
 
+{{ Form::open(['method' => 'get', 'route' => 'search']) }}
 
+  {{ Form::input('search', 'query', Input::get('query', ''))}}
+  
+	{!! Form::submit('Search', ['class' => 'btn btn-sm btn-info'] ) !!}
+{{ Form:: close() }}
       
-		<table class="table table-striped">
+	<table class="table table-striped">
 		@foreach ($accounts as $account)
    
 	<thead>

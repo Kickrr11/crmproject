@@ -181,8 +181,10 @@ return [
 		Barryvdh\Debugbar\ServiceProvider::class,
 		repositories\BackendServiceProvider::class,
 		\Torann\LaravelAsana\ServiceProvider::class,
-
-
+		Elasticquent\ElasticquentServiceProvider::class,
+		Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+		 Spatie\Fractal\FractalServiceProvider::class,
+		 'Sorskod\Larasponse\LarasponseServiceProvider'
 
     ],
 
@@ -237,7 +239,13 @@ return [
 		'Activity' => Regulus\ActivityLog\Models\Activity::class,
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
 		'Asana' => 'Torann\LaravelAsana\Facade',
+		'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
 
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+		
+		'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+		'Fractal' => Spatie\Fractal\FractalFacade::class
+		
 		
 
     ],

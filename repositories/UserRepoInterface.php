@@ -12,7 +12,7 @@ interface UserRepoInterface {
 	
 	public function edit($id=null);
 	
-	public function update($id=null);
+	public function update($id=null, array $data);
 	
 	public function destroy($id);
 	

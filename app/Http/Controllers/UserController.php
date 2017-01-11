@@ -1,14 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Collective\Html\FormFacade;
-use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
-use Auth;
-use Session;
-use App\User;
-use App\Contact;
 use Illuminate\Http\Request;
 use repositories\UserRepoInterface;
 
@@ -31,32 +27,43 @@ class UserController extends Controller
     
 
 
-    public function edit ($id) {
+    public function edit ($id)
+    {
         
         $user = $this->user->getbyId($id);
          return View::make ('useredit')->with('user',$user); 
          
     }
 
-    public function update (Request $request,$id=null) {
-     
-        $id = $request->input('id');
+    public function update (Request $request,$id=null)
+    {
+
+        $file = $request->file('pic');
+        $username=$request->input('username');
+        $email=$request->input('email');
+        if ($file) {
         
-        $user= User::find($id);
+            $destinationPath= 'uploads';
+                
+            $filename = $file->move($destinationPath,$file->getClientOriginalName());
+            $input = array('username'=>$username,'email'=>$email,'pic'=> $filename);
+        
+        } else {
  
-        if($user){
+            $input = $request->all();
             
-            $user->username    = $request->input('username');
-            $user->email  = $request->input('email');
- 
-            if($user->save()){
-               return redirect('users')->with('status', 'User updated!');
-            }else{
-               return array('status'=>'Could not update!');
-            }
         }
-        return array('status'=>'Could not find user!');
+
+        if($this->user->update($id,$input))
+        {
+            
+            return redirect()->route('users',$id)->with('status', 'User updated!');
+
+        }
+    }
+        
+  
 
     }
 
-}
+

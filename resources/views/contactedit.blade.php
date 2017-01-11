@@ -7,7 +7,8 @@
         {{ session('status') }}
     </div>
 @endif
-	{!! Form::open(['url' => 'contupdate', 'class' => 'form-horizontal']) !!}
+	 {{ Form::open(array('route' => array('contupdate', $contact->id),'class' => 'form-horizontal')) }} 
+
 	<?=Form::token() ?> 
     <fieldset>
  

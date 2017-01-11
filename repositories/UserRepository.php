@@ -3,7 +3,8 @@ namespace repositories;
 use App\Account;
 use App\User;
 use Validator, Input, Redirect; 
-use Auth;
+use Auth;  
+    
 
 class UserRepository implements UserRepoInterface {
 	
@@ -32,7 +33,11 @@ class UserRepository implements UserRepoInterface {
         
         
     }
-    public function update($id = null) {
+    public function update($id = null, array $data) {
+        
+        $user = User::find($id);
+        
+        return $user->fill($data)->save();
         
     }
     

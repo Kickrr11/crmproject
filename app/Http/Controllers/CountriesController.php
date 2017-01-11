@@ -1,27 +1,28 @@
 <?php 
-
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Collective\Html\FormFacade;
-use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
 use Illuminate\Http\Request;
-use Auth;
 use Session;
 use App\Country;
 use repositories\CountryRepoInterface;
 
-class CountriesController extends Controller {
+class CountriesController extends Controller
+{
 
     private $country;
 
-    public function __construct(CountryRepoInterface $country ) {
+    public function __construct(CountryRepoInterface $country )
+    {
         
         $this->country=$country;
     }
     
-    public function index() {
+    public function index()
+    {
         
         $countries = $this->country->selectAll();
         
@@ -29,7 +30,8 @@ class CountriesController extends Controller {
         
     }
     
-    public function show ($id) {
+    public function show ($id)
+    {
         
         $country = Country::find($id);
                     
@@ -38,14 +40,15 @@ class CountriesController extends Controller {
 
     } 
     
-    public function create() {
-
+    public function create()
+    {
 	return View::make ('newcountry');
 
     }
     
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         
         $v = Validator::make($request->all(), [
             
@@ -58,30 +61,29 @@ class CountriesController extends Controller {
 			
             return Redirect::back ()->withErrors($v);
 		
-	}
-		
-	else  {
-      
+	} else  {
+
            $input = $request->all();
            
            $this->country->store ($input);
 
 	}
 
-        
         return redirect('countries')->with('status', 'Country created!');
 		
     }
     
     
-    public function edit ($id) {
+    public function edit ($id)
+    {
     
         $country = $this->country->getbyId($id);
          return View::make ('countryedit')->with('country',$country); 
         
     }
     
-    public function update (Request $request,$id=null) {
+    public function update (Request $request,$id=null)
+    {
      
         $id = $request->input('id');
         
@@ -103,7 +105,8 @@ class CountriesController extends Controller {
     }
     
     
-    public function destroy(Request $request,$id=null) {
+    public function destroy(Request $request,$id=null)
+    {
         
         $id = $request->input('countryid');
         
@@ -114,10 +117,8 @@ class CountriesController extends Controller {
            return redirect('countries')->with('status', 'Country deleted!');
             
             
-        }
-        
-        else {
-            
+        } else {
+
             return array('status'=>'Could not delete!');
             
         }

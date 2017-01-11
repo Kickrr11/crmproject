@@ -232,7 +232,7 @@
 	<h4>Add a note: </h4>
 	 
 	{{ Form::textarea('description',$value=null,['class' => 'form-control', 'id'=> 'some-textarea','placeholder' => 'Enter text ...', 'type' => 'text'])}}
-	
+	{{Form::file('doc')}}
 
  
 	{{ Form::hidden('accountid', $account->id) }}
@@ -254,13 +254,26 @@
 	</div><!-- /row -->
 
 	<div class="row">
+	
+		@if ($notes->user->pic)
+			
+		<div class="col-sm-1">
 
-	<div class="col-sm-1">
+			<div class="thumbnail">
+				<img src='{{ asset($notes->user->pic) }}'>
+			</div><!-- /thumbnail -->
+		</div><!-- /col-sm-1 -->
 
-		<div class="thumbnail">
-		<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-		</div><!-- /thumbnail -->
-	</div><!-- /col-sm-1 -->
+		@else
+		<div class="col-sm-1">
+
+			<div class="thumbnail">
+				<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+			</div><!-- /thumbnail -->
+		</div><!-- /col-sm-1 -->
+		@endif
+
+
 
 	<div class="col-sm-5">
 		<div class="panel panel-default">
@@ -270,7 +283,13 @@
 			</div>
 			<div class="panel-body">
 			{!!$notes->description!!}
+			@if ($notes->doc)
+			{!! HTML::linkRoute('file', $notes->doc, array($notes->id)) !!}
 			
+
+
+			@endif
+
 			</div><!-- /panel-body -->
 		</div><!-- /panel panel-default -->
 	

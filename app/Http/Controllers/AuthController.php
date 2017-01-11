@@ -1,7 +1,7 @@
 <?php 
 
-
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Collective\Html\FormFacade;
 use Illuminate\Support\Facades\View;
@@ -12,80 +12,75 @@ use Illuminate\Support\Facades\Auth;
 use repositories\UserRepoInterface;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
     private $user;
 
-    public function __construct(UserRepoInterface $user) {
-        
+    public function __construct(UserRepoInterface $user)
+    {
         $this->user=$user;
     }
     
-    public function login() {
-        
-        
+    public function login()
+    {
+
         return View::make('login');
-        
     }
     
-    public function doLogout(){
+    public function doLogout()            
+    {
         
         Auth::logout(); // logging out user
-            return Redirect::to('login'); // redirection to login screen
+        
+        return Redirect::to('login'); // redirection to login screen
 	
-		
-		
     }
     
-    public function logged () {
+    public function logged () 
+    {
         
         $data=Input::all();
         
         $rules= array(
-            'email' => 'required|email', // make sure the email is an actual email
-            'password' => 'required|alphaNum|min:4'
+            'email' => 'required|email', 
+            'password' => 'required|min:4'
         
         ); 
         
         $validator = Validator::make ($data, $rules);
         
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             
             return Redirect::to ('/login' )->withErrors($validator)
                 ->withInput (Input::except ('password'));
             
-        }
-        
-        
-        
-        else {
-            
+        } else {
+
             $userdata=array('email' => Input::get('email'),
             'password' => Input::get('password'));  
 
         }
         
-        if (Auth::validate($userdata)) {
-            if (Auth::attempt($userdata)) {
+        if (Auth::validate($userdata)){
+            if (Auth::attempt($userdata)){
+            
                 return Redirect::to ('/dashboard' );
             }
-        } 
-        else {
-          
-          
+        }   else {
+
         // if any error send back with message.
             $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
         
             return Redirect::back()
                     ->withErrors($errors)
                     ->withInput(Input::except('password'));
-       
 
             return Redirect::to('login');
           
-        }
-      
-        
+            }
+
     }
     
     public function registration () {
@@ -95,22 +90,26 @@ class AuthController extends Controller {
     }
     
 
-    public function createRegistration(Request $request) {
+    public function createRegistration(Request $request)
+    {
+        $password = $request->input('password');
         
         $input=array(
 		
-            'username'=>$request->input('username'),
+           'username'=>$request->input('username'),
             
             /*do hash password */
-            'password'=>$request->input('password'),
-            'email'=>$request->input('email')
+            
+           'password'=>bcrypt($password),
+
+           'email'=>$request->input('email')
 	
         );
         
         $validator = Validator::make($input, array (
             
             'username' => 'required|unique:users',
-            'password' => 'required|min:3',
+            'password' => 'required|min:4',
             
             'email' => 'required|email|unique:users'
             
@@ -121,26 +120,13 @@ class AuthController extends Controller {
             return Redirect::back()
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
-            
-            
-        }
-        
-        else {
-            
-           $input = $request->all();
-           
+
+        }   else {
+
            $this->user->store ($input);
-            
-            
-            
-            return Redirect::to('/login');
-            /*
-                ->with('global','You successfully created a 
-                new account an email has been sent to verify your account');
-        
-             * 
-             * 	
-             */
+
+           return Redirect::to('/login');
+
         }
     }
   

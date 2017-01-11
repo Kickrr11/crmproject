@@ -1,49 +1,51 @@
 <?php 
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Collective\Html\FormFacade;
-use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
-use Session;
-use Illuminate\Http\RedirectResponse;
 use repositories\AccountRepoInterface;
 
-class AccountController extends Controller {
-    
-    public function __construct(AccountRepoInterface $account ) {
-        
+class AccountController extends Controller
+{
+
+    private $account;
+
+    public function __construct(AccountRepoInterface $account )
+    {
         $this->account=$account;
     }
     
-    public function index() {
+    public function index()
+    {
         
         $accounts = $this->account->selectAll();
         
-        return View::make('accounts', ['accounts'=>$accounts]);
-        
+        return View::make('accounts', ['accounts'=>$accounts]);        
     }
     
-    public function show ($id) {
-
+    public function show ($id)
+    {
         return View::make('accountsview')   
            ->with('contact', $this->account->contacts($id) )
            ->with('note', $this->account->notes($id))
-           ->with ('account', $this->account->getbyId($id)); 
-    } 
-    
-    public function create($id=null) {
+           ->with ('account', $this->account->getbyId($id));      
+    }
+
+    public function create($id=null)
+    {
 
 	return View::make ('newaccount')
 	->with('title', 'New Account')
 	->with('country', $this->account->create($id)->sortBy('name'));
-    
     }
     
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         
         $v = Validator::make($request->all(), [
             
@@ -52,14 +54,13 @@ class AccountController extends Controller {
             		
             ]);
 		
-	if ($v->fails()) {
+	if ($v->fails())
+        {
 			
             return Redirect::back ()->withErrors($v);
 		
-	}
+	} else  {
 		
-	else  {
-
            $input = $request->all();
            
            $this->account->store ($input);
@@ -67,39 +68,37 @@ class AccountController extends Controller {
         return redirect('accounts')->with('status', 'Account created!');
 
         }
-        
-			
+	
     }
     
-    public function edit ($id) {
+    public function edit ($id) 
+    {
         
         $account = $this->account->getbyId($id);
          return View::make ('accountedit')->with('account',$account); 
         
     }
-    
-    public function update (Request $request,$id=null) {
-     
-        $id = $request->input('id');
-        
-        $account= $this->account;
+   
+    public function update (Request $request,$id=null)
+    {
  
-        if($account){
+        $input=$request->all();
+
+        if ($this->account ->update($id,$input)) {
             
-            $account->name    = $request->input('name');
-            $account->description  = $request->input('description');
- 
-            if($account->update($id)){
-               return redirect()->route('accounts',$id)->with('status', 'Account updated!');
-            }else{
+            return redirect()->route('accounts',$id)->with('status', 'Account updated!');
+
+        }
+        else{
                return array('status'=>'Could not update!');
             }
-        }
+            
         return array('status'=>'Could not find Account!');
+        
+        }
 
-    }
-    
-    public function destroy(Request $request,$id=null) {
+    public function destroy(Request $request,$id=null) 
+    {
         
         $id = $request->input('accountid');
         
@@ -109,13 +108,32 @@ class AccountController extends Controller {
             
            return redirect('accounts')->with('status', 'Account deleted!');
 
-        }
-        
-        else {
-            
+        } else {
+
             return array('status'=>'Could not delete!');
-    
         }
         
     }
+  
+    public function search ()
+    {
+
+        $query = Input::get('query','');  
+        
+        if($query) {
+
+        $accounts = $this->account->search($query);
+
+        $accounts->getAggregations();
+
+        } else {
+        // Show all posts if no query is set
+        $accounts = $this->account->selectAll(); 
+
+        }
+
+        return View::make('accountssearch')->with('accounts',$accounts);
+
+    }
+
 }

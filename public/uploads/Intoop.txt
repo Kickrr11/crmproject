@@ -1,0 +1,26 @@
+OOP - kakwo e oop - oop e tehnika v programiraneto za koqto moje da se misli kato obekti ot istinskiq sviat. Raboti s clasowe i obekti
+
+kato polzva tehniki kato nasledqvane, enkapsulacia i drugi. Predistvata sa i mnogo po-lesen maintenance na koda kakto i mnogo po-dobra vidimost, mnogo po-lesno razshirqvane na prilojeniqta i tn.
+
+Class e template-a na obekt ot tozi class, sudurja metodi i svojstva, do koito vsqka instancia na clasa ima dostup moje da polzva, 
+
+Obekt e instancia na clasa kato nasledqva metodite i svojstvata i sustoyanieto na clasa.
+
+Encapulacia - publica, private protected, 
+
+construct - izvikva se pri nova instancia na clasa. ako ne suzdaden custom constructor, php izvikwa deafult constructor. 
+
+set and get - php - pisane v nedeklarirani promenlivi ili v promenlivi izvun clasa kato protecte i private, advantage e che novata informacia moje da bude verificirana predi izpulnenie i tn, kato osnovna funcia e slaganeto na control vurhu recheneto i prezapisvaneto na promenlivi
+
+__cal php pisane v neinicializirani ili nedostupni metodi. 
+
+AJAX- e metod za prawene na web stranici interaktivno. AJAX pozvolqva contenta na web stranicite da se update-va avtomatichno, kogato potrebitelq izvurshi nqkakwo dejstvie na stranicata,
+
+Polzva XMLHttpobject, kudeto workflowto e slednoto -> javascript vika ->ajax engine, kojto igrae rolqta na posrednik mejdu clientskiq browser i servera. Engine-a raboti v backgrounda. Pri clikvane ili obnoviavane na informacia javascript vika Ajax engine-a, ako engina iska dopulnitelna informacia 
+
+procesva http request kum servera, izpolzvajki json ili xml, kato prez towa vreme update-va stranicata. 
+
+Rabota s indexi mysql - izpozva se za ulesnqvane turseneto v opredeleno pole, moje da se polzva samo za edno pole na dadena tablica, te ne mogificirat informaciata, zapisvat se vurhu tvurdia disc. Primary key, unique, index,   
+
+ REST -> Resource- based , person resource, kojto ima get, post , put, delete methodi vs SOAP -actions (methods). Resources sa identificirani s uri's. Edin i susht URI moje da suotvetstva na razlichni actioni ili metodi v zavisimost ot http methoda - get, post, put delete i tn. 
+ 

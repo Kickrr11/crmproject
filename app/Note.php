@@ -10,7 +10,7 @@ class Note extends Model
 {
     protected $table='notes';
     protected $fillable = [
-        'description'
+        'name','description','doc'
     ];
     
     public function account () {

@@ -7,8 +7,14 @@ use Auth;
 
 class NoteRepository implements NoteRepoInterface {
 	
-
-    public function getbyId($id = null) {
+    
+    public function selectAll() {
+        
+        return Note::all();
+        
+    }
+    
+    public function getbyId($id=null) {
         
         return Note::find($id);
         
@@ -47,20 +53,20 @@ class NoteRepository implements NoteRepoInterface {
         
     }
 
-    public function update($id = null) {
+    public function update($id = null, array $data) {
         
         $note = Note::find($id);
         
-        return $note->save();
+        return $note->fill($data)->save();
         
     }
-    
+
     public function destroy($id) {
-        
+   
         $note= Note::find($id);
         
         return $note->delete();
-        
+    
     }
 
 

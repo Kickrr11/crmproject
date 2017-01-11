@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Collective\Html\FormFacade;
-use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\View;
 use Validator, Input, Redirect; 
-use Auth;
-use Session;
 use Illuminate\Http\Request;
 use repositories\ContactRepoInterface;
 
@@ -20,7 +18,18 @@ class ContactController extends Controller
         $this->contact=$contact;
     }
     
-    public function store (Request $request) {
+    public function index()
+    {
+        //TODO VIEW
+        
+        $contact = $this->contact->selectAll();
+        
+        return $contact;
+        
+    }
+    
+    public function store (Request $request)
+    {
         
         $v = Validator::make($request->all(), [
             
@@ -37,21 +46,19 @@ class ContactController extends Controller
 			
             $errors = $v->errors();
 	
-	}
-		
-	else  {
-            
+	} else  {
+
            $input = $request->all();
            
            $this->contact->store ($input);
                
            return redirect()->back()->with('status', 'Contact created!');
-               
- 
+
         }
     }    
     
-    public function show ($id=null) {
+    public function show ($id=null)
+    {
         
         $contact = $this->contact->getbyId($id);
         
@@ -60,36 +67,33 @@ class ContactController extends Controller
         
     }
     
-    public function edit ($id) {
-        
+    public function edit ($id)
+    {       
         $contact = $this->contact->getbyId($id);
          return View::make ('contactedit')->with('contact',$contact); 
          
     }
 
-    public function update (Request $request,$id=null) {
-     
-        $id = $request->input('id');
-        
-        $contact= $this->contact;
+    public function update (Request $request,$id=null)
+    {
  
-        if($contact){
+        $input=$request->all();
+
+        if ($this->contact ->update($id,$input)) {
             
-            $contact->firstname    = $request->input('firstname');
-            $contact->lastname  = $request->input('lastname');
- 
-            if($contact->update($id)){
-               return redirect()->back()->with('status', 'Contact updated!');
-            }else{
+            return redirect()->route('contacts',$id)->with('status', 'Contact updated!');
+
+        }
+        else{
                return array('status'=>'Could not update!');
             }
-        }
-        return array('status'=>'Could not find Account!');
-
+            
+             return array('status'=>'Could not find contact!');
     }
     
     
-    public function destroy(Request $request,$id=null) {
+    public function destroy(Request $request,$id=null)
+    {
         
         $id = $request->input('contactid');
         $remove =$this->contact->destroy($id);
@@ -99,10 +103,8 @@ class ContactController extends Controller
             
            return redirect('accounts')->with('status', 'Contact deleted!');
  
-        }
-        
-        else {
-            
+        } else {
+
             return array('status'=>'Could not update!');
             
         }

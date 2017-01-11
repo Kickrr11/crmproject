@@ -13,8 +13,15 @@
 				</div>
             <div class="panel-body">
 				<div class="row">
-					<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://pixabay.com/static/uploads/photo/2013/07/13/12/07/avatar-159236_960_720.png"style="width:100px; height:100px;" > </div>
 
+					
+					@if ($user->pic)
+						<div class="col-md-3 col-lg-3 " align="center">
+						<img src='{{ asset($user->pic) }}'style="width:100px; height:100px;"></div>
+					@else
+					<div class="col-md-3 col-lg-3 " align="center">
+					<img alt="User Pic" src="https://pixabay.com/static/uploads/photo/2013/07/13/12/07/avatar-159236_960_720.png"style="width:100px; height:100px;" > </div>
+					@endif
 					<div class=" col-md-9 col-lg-9 "> 
 					  <table class="table table-user-information">
 						<tbody>
@@ -25,10 +32,10 @@
 
 					   
 							 <tr>
-								 <tr>
+							<tr>
 							<td>Gender</td>
 							<td>Male</td>
-						  </tr>
+							</tr>
 							<tr>
 							<td>Home Address</td>
 							<td>Sofia,BG</td>

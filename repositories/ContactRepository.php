@@ -1,5 +1,6 @@
 <?php 
 namespace repositories;
+
 use App\Account;
 use App\Contact;
 use Validator, Input, Redirect; 
@@ -58,11 +59,11 @@ class ContactRepository implements ContactRepoInterface {
 
 
 
-    public function update($id = null) {
+    public function update($id = null,array $data) {
         
         $contact = Contact::find($id);
         
-        return $contact->save();
+        return $contact->fill($data)->save();
         
     }
     
@@ -71,7 +72,7 @@ class ContactRepository implements ContactRepoInterface {
         $contact= Contact::find($id);
         
         return $contact->delete();
-        
+
     }
 
 
