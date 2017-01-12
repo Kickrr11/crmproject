@@ -33,7 +33,7 @@ class CountriesController extends Controller
     public function show ($id)
     {
         
-        $country = Country::find($id);
+        $country = $this->country->getbyId($id);
                     
         return View::make('countriesview', ['country' => $country])
              ->with('account',$this->country->account($id)); 

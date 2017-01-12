@@ -42,7 +42,7 @@
 		
 
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('Street', 'Street:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                {{ Form::text('street',$value=$account->street,['class' => 'form-control', 'placeholder' => 'street', 'type' => 'text'])}}
@@ -50,7 +50,7 @@
             </div>
         </div>
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('City', 'City:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                {{ Form::text('city',$value=$account->city,['class' => 'form-control', 'placeholder' => 'city', 'type' => 'text'])}}
@@ -58,7 +58,7 @@
             </div>
         </div>
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('Country', 'Country:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                {{ Form::text('country',$value=$account->country,['class' => 'form-control', 'placeholder' => 'country', 'type' => 'text'])}}
@@ -66,7 +66,7 @@
             </div>
         </div>
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('Zip', 'Zip:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                {{ Form::text('zip',$value=$account->zip,['class' => 'form-control', 'placeholder' => 'zip', 'type' => 'text'])}}
@@ -74,7 +74,7 @@
             </div>
         </div>
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('Phone', 'Phone:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                {{ Form::text('phone',$value=$account->phone,['class' => 'form-control', 'placeholder' => 'phone', 'type' => 'text'])}}

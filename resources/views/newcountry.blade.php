@@ -20,14 +20,14 @@
             {!! Form::label('name', 'Country Name:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
            
-			@if ($errors->first('name'))
-				{{ Form::text('name', null, $attributes = array('class'=>'form-control')) }}
-				{{ $errors->first('name') }}
-			@else
-				{{ Form::text('name',$value=null,['class' => 'form-control', 'placeholder' => 'Country Name', 'type' => 'text']) }}
-			@endif
+		@if ($errors->first('name'))
+		{{ Form::text('name', null, $attributes = array('class'=>'form-control')) }}
+		{{ $errors->first('name') }}
+		@else
+                {{ Form::text('name',$value=null,['class' => 'form-control', 'placeholder' => 'Country Name', 'type' => 'text']) }}
+		@endif
 
-		   </div>
+            </div>
         </div>
 		
 
@@ -37,7 +37,7 @@
             {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
                 {!! Form::text('description',$value=null,['class' => 'form-control', 'placeholder' => 'Description', 'type' => 'text']) !!}
-					{{$errors->first('description')}}
+                    {{$errors->first('description')}}
             </div>
         </div>
 

@@ -9,50 +9,44 @@
     </div>
 @endif
 
-	<div class="panel panel-info">
-		<div class="panel-heading">
-			<h3 class="panel-title">{{$country->name}}</h3>
+    <div class="panel panel-info">
+	<div class="panel-heading">
+            <h3 class="panel-title">{{$country->name}}</h3>
   
-		</div>
-		
-		
 	</div>
+		
+		
+    </div>
 
     
     
-     <h3> Accounts for this country </h3>
-	<table class="table table-striped">
+        <h3> Accounts for this country </h3>
+    <table class="table table-striped">
 		
-	   @foreach ($account as $accounts) 
-		<thead>
+	@foreach ($account as $accounts) 
+	<thead>
 		
-		  <tr>
-			<th>#</th>
-			<th>AccountName</th>
-			<th>CreatedAt</th>
-			<th>Last Updated</th>
-			<th>Author</th>
+            <tr>
+		<th>#</th>
+		<th>AccountName</th>
+		<th>CreatedAt</th>
+		<th>Last Updated</th>
+		<th>Author</th>
 			
-		  </tr>
-		</thead>
-		<tbody>
-			 
-			
-			<td> {{ $accounts->id }}</td>
-
-			<td> {{ HTML::linkRoute('accounts', $accounts->name , array($accounts->id)) }}</td>
-			<td> {{$accounts->created_at}}</td>
-			
-			
-			<td>{{$accounts->updated_at}}</td>
-			<td>{{ HTML::linkRoute('accounts', $accounts->user->username , array($accounts->id)) }}
-			</td>
-			
-		
-		</tbody>
+            </tr>
+	</thead>
+	<tbody>
+	
+            <td> {{ $accounts->id }}</td>
+            <td> {{ HTML::linkRoute('accounts', $accounts->name , array($accounts->id)) }}</td>
+            <td> {{$accounts->created_at}}</td>
+	
+            <td>{{$accounts->updated_at}}</td>
+            <td>{{ HTML::linkRoute('accounts', $accounts->user->username , array($accounts->id)) }}
+            </td>
+	
+	</tbody>
 		@endforeach
-  </table>
-
-		 
-		 
+    </table>
+	 
 @endsection

@@ -19,14 +19,14 @@
             {!! Form::label('name', 'Username:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
            
-			@if ($errors->first('email'))
-				{{ Form::text('email', null, $attributes = array('class'=>'error')) }}
-				{{ $errors->first('email', '<small class=error>:message</small>') }}
-			@else
-				{{ Form::text('username',$value=$user->username,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
-			@endif
+		@if ($errors->first('email'))
+                    {{ Form::text('email', null, $attributes = array('class'=>'error')) }}
+                    {{ $errors->first('email', '<small class=error>:message</small>') }}
+                @else
+            {{ Form::text('username',$value=$user->username,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
+		@endif
 
-		   </div>
+            </div>
         </div>
 		
 
@@ -40,7 +40,7 @@
             </div>
         </div>
 		
-		<div class="form-group">
+	<div class="form-group">
             {!! Form::label('pic', 'Picture:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
 				{{$user->pic}}
@@ -49,7 +49,7 @@
         </div>
 	
         <!-- Select Multiple -->
-		<input type="hidden" name="id" value=<?=$user->id?> >
+	<input type="hidden" name="id" value=<?=$user->id?> >
  
         <!-- Submit Button -->
         <div class="form-group">

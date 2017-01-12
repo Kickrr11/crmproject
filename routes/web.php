@@ -55,6 +55,12 @@ Route::any('dashboard',
         'uses'=> 'HomeController@hello')
 
         ); 
+
+Route::any('charts',
+        array('as'=>'charts',
+        'uses'=> 'HomeController@charts')
+
+        ); 
 		
 Route::any('search',
     array('as'=>'search',

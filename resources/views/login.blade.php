@@ -17,78 +17,74 @@
 
 <div class="container">
 
-  <div class="row">
+    <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-login">
 			<div class="panel-heading">
 				<div class="row">
-					<div class="col-xs-6">
+                                    <div class="col-xs-6">
 			
-				{{ HTML::linkRoute('login','Login')}}
-					</div>
-					<div class="col-xs-6">
-						{{ HTML::linkRoute('registration','Register')}}
-					</div>
+                                        {{ HTML::linkRoute('login','Login')}}
+                                    </div>
+                                    <div class="col-xs-6">
+					{{ HTML::linkRoute('registration','Register')}}
+                                    </div>
 				</div>
 				<hr>
 			</div>
-			<div class="panel-body">
+		<div class="panel-body">
 
-					<div class="col-lg-12">
-						<form  id="login-form" role="form" style="display: block;" <?=Form::open(array('route'=>'logged'))?>
-							<div class="form-group">
+                    <div class="col-lg-12">
+			<form  id="login-form" role="form" style="display: block;" <?=Form::open(array('route'=>'logged'))?>
+                            <div class="form-group">
 								
-							{!! Form::label('email', 'Email:', ['class' => 'col-lg-2 control-label']) !!}
-							<div class="col-lg-10">	
-								<input type="text" name="email" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-								<p>{{ $errors->first('email') }}</p>
-							</div>
-							</div>
-							<div class="form-group">
-							{!! Form::label('password', 'Password:', ['class' => 'col-lg-2 control-label']) !!}
-							<div class="col-lg-10">
-								<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-								<p>{{ $errors->first('password') }}</p>
-							</div>
-							</div>
-							<div class="form-group text-center">
-								<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-								<label for="remember"> Remember Me</label>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-sm-6 col-sm-offset-3">
-										<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="text-center">
-											<a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-									@if ($error = $errors->first('password'))
-								<div class="alert alert-danger">
-									{{ $error }}
-								</div>
-								@endif
+				{!! Form::label('email', 'Email:', ['class' => 'col-lg-2 control-label']) !!}
+                                <div class="col-lg-10">	
+                                    <input type="text" name="email" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+					<p>{{ $errors->first('email') }}</p>
+				</div>
+                    </div>
+                            <div class="form-group">
+				{!! Form::label('password', 'Password:', ['class' => 'col-lg-2 control-label']) !!}
+				<div class="col-lg-10">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+					<p>{{ $errors->first('password') }}</p>
+				</div>
+                            </div>
+                            <div class="form-group text-center">
+				<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+				<label for="remember"> Remember Me</label>
+                            </div>
+                            <div class="form-group">
+				<div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+					<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                    </div>
+				</div>
+                            </div>
+                            <div class="form-group">
+				<div class="row">
+                                    <div class="col-lg-12">
+					<div class="text-center">
+                                            <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
+					</div>
+                                    </div>
+				</div>
+                            </div>
+			<div class="row">
+                            @if ($error = $errors->first('password'))
+				<div class="alert alert-danger">
+                                    {{ $error }}
+				</div>
+                            @endif
 			
-							</div>
+			</div>
 						</form>
 
-					</div>
-				</div>
-			</div>
+                    </div>
 		</div>
 	</div>
-	</div>
+    </div>
+</div>
+	
 </body>
- 
- 
-</div>
-</div>

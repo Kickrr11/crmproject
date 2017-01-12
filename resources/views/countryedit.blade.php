@@ -18,18 +18,16 @@
             {!! Form::label('name', 'Country Name:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
            
-			@if ($errors->first('email'))
-				{{ Form::text('email', null, $attributes = array('class'=>'error')) }}
-				{{ $errors->first('email', '<small class=error>:message</small>') }}
-			@else
-				{{ Form::text('name',$value=$country->name,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
-			@endif
+		@if ($errors->first('email'))
+                    {{ Form::text('email', null, $attributes = array('class'=>'error')) }}
+                        {{ $errors->first('email', '<small class=error>:message</small>') }}
+		@else
+                    {{ Form::text('name',$value=$country->name,['class' => 'form-control', 'placeholder' => 'Account Name', 'type' => 'text']) }}
+		@endif
 
-		   </div>
+            </div>
         </div>
-		
 
- 
         <!-- Password -->
         <div class="form-group">
             {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
@@ -40,7 +38,7 @@
         </div>
 	
         <!-- Select Multiple -->
-		<input type="hidden" name="id" value=<?=$country->id?> >
+            <input type="hidden" name="id" value=<?=$country->id?> >
  
         <!-- Submit Button -->
         <div class="form-group">

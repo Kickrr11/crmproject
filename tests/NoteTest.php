@@ -15,57 +15,53 @@ class NoteTest extends TestCase
      *
      * @return void
      */
-	use WithoutMiddleware;
+    use WithoutMiddleware;
 	 
-	public function setUp()
-	{
+    public function setUp()
+    {
     parent::setup();
    	Mockery::getConfiguration()->allowMockingNonExistentMethods(false);
 	
     // IoC container
-    $this->noteRepository = m::mock('repositories\NoteRepoInterface');
-    $this->app->instance('repositories\NoteRepoInterface', $this->noteRepository);
+        $this->noteRepository = m::mock('repositories\NoteRepoInterface');
+        $this->app->instance('repositories\NoteRepoInterface', $this->noteRepository);
 
-
-  }
-  public function tearDown()
-  {
-    m::close();
-    parent::tearDown();
-  } 
-      public function testStoreSuccess()
+    }
+    public function tearDown()
+    {
+        m::close();
+        parent::tearDown();
+    } 
+    
+    public function testStoreSuccess()
     {
         Input::replace($input = ['name' => 'Foo Name', 'description' => 'Foo description','accountid'=>1, 'userid'=>1,'doc'=>'file.jpg']);
-		$repository = $this->noteRepository;	
+        $repository = $this->noteRepository;	
         $repository->shouldReceive('store')->once();
-		$response= $this->call('POST', '/api/notes',$input);
-		$this->assertEquals(201, $response->getStatusCode());
+	$response= $this->call('POST', '/api/notes',$input);
+	$this->assertEquals(201, $response->getStatusCode());
 
     }
 //TODO
-	public function testUpdateNote() {
+    public function testUpdateNote()
+    {
 		
-		Input::replace($input = ['name' => 'Foo Name','description' => 'Foo description']);
-		$id = array('id'=>4);
-		$repository = $this->noteRepository;
-
+	Input::replace($input = ['name' => 'Foo Name','description' => 'Foo description']);
+	$id = array('id'=>4);
+	$repository = $this->noteRepository;	
+        $repository->shouldReceive('update')->once();		
+	$response= $this->call('PUT', 'api/notes/1',$input,$id);
+	$this->assertEquals(200, $response->getStatusCode());
 		
-        $repository->shouldReceive('update')->once();
-		
-		$response= $this->call('PUT', 'api/notes/1',$input,$id);
-		$this->assertEquals(200, $response->getStatusCode());
-		
-		}
+    }	
 	
-	public function testDeleteNote() {
+    public function testDeleteNote()
+    {		
+	$repository = $this->noteRepository;		
+        $repository->shouldReceive('destroy')->once();	
+	$response= $this->call('DELETE', '/api/notes/2');
+	$this->assertEquals(200, $response->getStatusCode());
 		
-		$repository = $this->noteRepository;
-		
-        $repository->shouldReceive('destroy')->once();
-		
-		$response= $this->call('DELETE', '/api/notes/2');
-		$this->assertEquals(200, $response->getStatusCode());
-		
-	}
+    }
 
 }
