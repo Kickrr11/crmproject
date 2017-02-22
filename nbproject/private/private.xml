@@ -3,8 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAccountContactController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/countryedit.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAuthenticateController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiContactController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/CountryAccountTransformer.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/tests/ContactTest.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/tests/NoteTest.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/contactview.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/newcountry.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/AccountController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/AccountNoteTransformer.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/accountssearch.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/NoteTransformer.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/registration.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/repositories/CountryRepository.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/repositories/CountryRepoInterface.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/newaccount.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Note.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/accountedit.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/navigation.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiUsersController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/CountryTransformer.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/countriesview.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAccountController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/dashboard.blade.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAccountContactController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/NoteRepoInterface.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiCountryAccountController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/tests/UserTest.php</file>
@@ -12,37 +35,29 @@
             <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/ContactTransformer.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/routes/api.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiNoteController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/contactedit.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/NoteController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAccountNoteController.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiContactController.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/CountryAccountTransformer.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/tests/CountryTest.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Country.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/ContactController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/NoteRepository.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/tests/ContactTest.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/AccountContactTransformer.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/tests/NoteTest.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/AccountController.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/accounts.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/AccountRepository.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/routes/web.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/AccountNoteTransformer.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/AccountTransformer.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/tests/AccountTest.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/HomeController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/UserRepoInterface.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/NoteTransformer.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/countries.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Account.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/noteupdate.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/ContactRepository.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/repositories/CountryRepository.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/repositories/CountryRepoInterface.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/UserController.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Note.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiUsersController.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Transformer/CountryTransformer.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/ContactRepoInterface.php</file>
+            <file>file:/C:/xampp2/htdocs/blog111/resources/views/accountsview.blade.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiCountryController.php</file>
-            <file>file:/C:/xampp2/htdocs/blog111/app/Http/Controllers/Api/ApiAccountController.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/app/User.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/AccountRepoInterface.php</file>
             <file>file:/C:/xampp2/htdocs/blog111/repositories/UserRepository.php</file>

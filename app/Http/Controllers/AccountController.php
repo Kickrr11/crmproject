@@ -19,6 +19,7 @@ class AccountController extends Controller
         $this->account=$account;
     }
     
+    
     public function index()
     {
         
