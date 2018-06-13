@@ -11,217 +11,205 @@
 |
 */
 
-
 Route::get('/', function () {
     //
 })->middleware('auth');
 
 Route::any('login',
-    array('as'=>'login',
-    'uses'=> 'AuthController@login')
-    
-    ); 
-	
+    ['as' => 'login',
+    'uses'=> 'AuthController@login', ]
+
+    );
+
 Route::any('logged',
-    array('as'=>'logged',
-    'uses'=> 'AuthController@logged')
-    
-    ); 
-	
-	Route::any('registration',
-    array('as'=>'registration',
-    'uses'=> 'AuthController@registration')
-    
-    ); 
+    ['as' => 'logged',
+    'uses'=> 'AuthController@logged', ]
+
+    );
+
+    Route::any('registration',
+    ['as' => 'registration',
+    'uses'=> 'AuthController@registration', ]
+
+    );
 
 Route::any('regcreate',
-    array('as'=>'regcreate',
-    'uses'=> 'AuthController@createRegistration')
-    
-    ); 
+    ['as' => 'regcreate',
+    'uses'=> 'AuthController@createRegistration', ]
 
+    );
 
-
-
-Route::group(['middleware' => ['auth']], function () {    
+Route::group(['middleware' => ['auth']], function () {
     Route::any('logout',
-        array('as'=>'logout',
-        'uses'=> 'AuthController@doLogout')
+        ['as' => 'logout',
+        'uses'=> 'AuthController@doLogout', ]
 
-        ); 
-  
-Route::any('dashboard',
-        array('as'=>'dashboard',
-        'uses'=> 'HomeController@hello')
+        );
 
-        ); 
+    Route::any('dashboard',
+        ['as' => 'dashboard',
+        'uses'=> 'HomeController@hello', ]
 
-Route::any('charts',
-        array('as'=>'charts',
-        'uses'=> 'HomeController@charts')
+        );
 
-        ); 
-		
-Route::any('search',
-    array('as'=>'search',
-    'uses'=> 'AccountController@search')
-    
-    ); 
+    Route::any('charts',
+        ['as' => 'charts',
+        'uses'=> 'HomeController@charts', ]
 
+        );
 
+    Route::any('search',
+    ['as' => 'search',
+    'uses'=> 'AccountController@search', ]
 
-Route::get('accounts',
-        array('as'=>'accountsall',
-        'uses'=> 'AccountController@index')
+    );
 
-    ); 
+    Route::get('accounts',
+        ['as' => 'accountsall',
+        'uses'=> 'AccountController@index', ]
 
-Route::get('accounts/{id}',
-        array('as'=>'accounts',
-        'uses'=> 'AccountController@show')
+    );
 
-    ); 
+    Route::get('accounts/{id}',
+        ['as' => 'accounts',
+        'uses'=> 'AccountController@show', ]
 
-Route::get('file/{file}',
-        array('as'=>'file',
-        'uses'=> 'NoteController@showfile')         
+    );
 
-    ); 
+    Route::get('file/{file}',
+        ['as' => 'file',
+        'uses'=> 'NoteController@showfile', ]
 
-Route::get('users/{id}',
-        array('as'=>'users',
-        'uses'=> 'UserController@show')
+    );
 
-    ); 
+    Route::get('users/{id}',
+        ['as' => 'users',
+        'uses'=> 'UserController@show', ]
 
-Route::get('useredit/{id}',
-        array('as'=>'useredit',
-        'uses'=> 'UserController@edit')
+    );
 
-    ); 
+    Route::get('useredit/{id}',
+        ['as' => 'useredit',
+        'uses'=> 'UserController@edit', ]
 
-Route::any('userupdate/{id?}',
-        array('as'=>'userupdate',
-        'uses'=> 'UserController@update')
+    );
 
-    ); 
-	
-Route::get('contacts',
-  array('as'=>'contacts',
-        'uses'=> 'ContactController@index'
+    Route::any('userupdate/{id?}',
+        ['as' => 'userupdate',
+        'uses'=> 'UserController@update', ]
 
-)); 
+    );
 
+    Route::get('contacts',
+  ['as'       => 'contacts',
+        'uses'=> 'ContactController@index',
 
-Route::post('contcreate',
-  array('as'=>'contcreate',
-        'uses'=> 'ContactController@store'
+]);
 
-)); 
+    Route::post('contcreate',
+  ['as'       => 'contcreate',
+        'uses'=> 'ContactController@store',
 
-Route::get('contview/{id}',
-  array('as'=>'contview',
-        'uses'=> 'ContactController@show'
+]);
 
-)); 
+    Route::get('contview/{id}',
+  ['as'       => 'contview',
+        'uses'=> 'ContactController@show',
 
+]);
 
-Route::any('contedit/{id?}',
-  array('as'=>'contedit',
-        'uses'=> 'ContactController@edit'
+    Route::any('contedit/{id?}',
+  ['as'       => 'contedit',
+        'uses'=> 'ContactController@edit',
 
-)); 
+]);
 
-Route::any('contupdate/{id?}',
-  array('as'=>'contupdate',
-        'uses'=> 'ContactController@update'
+    Route::any('contupdate/{id?}',
+  ['as'       => 'contupdate',
+        'uses'=> 'ContactController@update',
 
-)); 
+]);
 
+    Route::any('contdel/{id?}',
+  ['as'       => 'contdel',
+        'uses'=> 'ContactController@destroy',
 
-Route::any('contdel/{id?}',
-  array('as'=>'contdel',
-        'uses'=> 'ContactController@destroy'
+]);
 
-)); 
+    Route::post('notenotecreate',
+        ['as' => 'notecreate',
+        'uses'=> 'NoteController@store', ]
 
-Route::post('notenotecreate',
-        array('as'=>'notecreate',
-        'uses'=> 'NoteController@store')
+    );
 
-    ); 
-	
-	Route::any('noteupdate',
-        array('as'=>'noteupdate',
-        'uses'=> 'NoteController@update')
+    Route::any('noteupdate',
+        ['as' => 'noteupdate',
+        'uses'=> 'NoteController@update', ]
 
-    ); 
+    );
 
-Route::get('accountedit/{id}',
-        array('as'=>'accountedit',
-        'uses'=> 'AccountController@edit')
+    Route::get('accountedit/{id}',
+        ['as' => 'accountedit',
+        'uses'=> 'AccountController@edit', ]
 
-    ); 
+    );
 
-Route::any('accountupdate/{id?}',
-        array('as'=>'accountupdate',
-        'uses'=> 'AccountController@update')
+    Route::any('accountupdate/{id?}',
+        ['as' => 'accountupdate',
+        'uses'=> 'AccountController@update', ]
 
-    ); 
+    );
 
-Route::any('accountdelete/{id?}',
-        array('as'=>'accountdelete',
-        'uses'=> 'AccountController@destroy')
+    Route::any('accountdelete/{id?}',
+        ['as' => 'accountdelete',
+        'uses'=> 'AccountController@destroy', ]
 
-    ); 
-	
-Route::get('countries',
-        array('as'=>'countriesall',
-        'uses'=> 'CountriesController@index')
+    );
 
-        ); 
+    Route::get('countries',
+        ['as' => 'countriesall',
+        'uses'=> 'CountriesController@index', ]
+
+        );
     Route::get('countries/{id}',
-        array('as'=>'countries',
-        'uses'=> 'CountriesController@show')
+        ['as' => 'countries',
+        'uses'=> 'CountriesController@show', ]
 
-        ); 
-    
+        );
+
     Route::get('newcountry',
-        array('as'=>'newcountry',
-        'uses'=> 'CountriesController@create')
+        ['as' => 'newcountry',
+        'uses'=> 'CountriesController@create', ]
 
-    ); 
-    
+    );
 
     Route::post('countrycreate',
-        array('as'=>'countrycreate',
-        'uses'=> 'CountriesController@store')
+        ['as' => 'countrycreate',
+        'uses'=> 'CountriesController@store', ]
 
-    ); 
-    
+    );
+
     Route::get('countryedit/{id?}',
-        array('as'=>'countryedit',
-        'uses'=> 'CountriesController@edit')
+        ['as' => 'countryedit',
+        'uses'=> 'CountriesController@edit', ]
 
-    ); 
-    
+    );
+
     Route::post('countryupdate/{id?}',
-        array('as'=>'countryupdate',
-        'uses'=> 'CountriesController@update')
+        ['as' => 'countryupdate',
+        'uses'=> 'CountriesController@update', ]
 
-    ); 
-    
-    
+    );
+
     Route::get('newaccount',
-        array('as'=>'newaccount',
-        'uses'=> 'AccountController@create')
+        ['as' => 'newaccount',
+        'uses'=> 'AccountController@create', ]
 
-        ); 
-    
+        );
+
     Route::post('accountcreate',
-        array('as'=>'accountcreate',
-        'uses'=> 'AccountController@store')
+        ['as' => 'accountcreate',
+        'uses'=> 'AccountController@store', ]
 
-        ); 
-    
+        );
 });
