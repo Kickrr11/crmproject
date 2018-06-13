@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator, Input, Redirect; 
+use Illuminate\Http\Request;
 use repositories\NoteRepoInterface;
+use Validator;
 
 class ApiNoteController extends Controller
 {
@@ -14,16 +14,15 @@ class ApiNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function __construct(NoteRepoInterface $note)
     {
-        $this->note= $note;
+        $this->note = $note;
     }
-    
+
     public function index()
     {
         $note = $this->note->selectAll();
-        
+
         return $note;
     }
 
@@ -40,62 +39,47 @@ class ApiNoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-
-    public function store (Request $request) {
-        
+    public function store(Request $request)
+    {
         $v = Validator::make($request->all(), [
-            
-            'description' => 'required',
-	
-            ]);
-		
-	if ($v->fails()) {
-			
-           return response()->json(['message' => 'description required', 'code' =>400],400);
-	
-	}
-		
-	else  {
 
+            'description' => 'required',
+
+            ]);
+
+        if ($v->fails()) {
+            return response()->json(['message' => 'description required', 'code' =>400], 400);
+        } else {
             $file = $request->file('doc');
-            $description=$request->input('description');
-            
+            $description = $request->input('description');
+
             if ($file) {
-                $destinationPath= 'uploads';
-                
-                $filename = $file->move($destinationPath,$file->getClientOriginalName());
-                $input = array('description'=>$description,'doc'=> $filename);
-            }
-            
-            else {
-                
-              $input = $request->all(); 
-              
+                $destinationPath = 'uploads';
+
+                $filename = $file->move($destinationPath, $file->getClientOriginalName());
+                $input = ['description'=>$description, 'doc'=> $filename];
+            } else {
+                $input = $request->all();
             }
             if ($input) {
-            
-            $this->note->store($input);
-            
-                return response()->json(['message' => 'Note created', 'code' =>201],201 );
-            }
-            
-            else {
-                
-                return response()->json(['message' => 'Couldnt create note', 'code' =>401],401 );
+                $this->note->store($input);
 
+                return response()->json(['message' => 'Note created', 'code' =>201], 201);
+            } else {
+                return response()->json(['message' => 'Couldnt create note', 'code' =>401], 401);
             }
-	}
-
-    
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -106,7 +90,8 @@ class ApiNoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -117,66 +102,50 @@ class ApiNoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    
+
     //TODO
-    
+
     public function update(Request $request, $id)
     {
-        
         $file = $request->file('doc');
-        $name=$request->input('name');
-        $description=$request->input('description');
+        $name = $request->input('name');
+        $description = $request->input('description');
         if ($file) {
-        $destinationPath= 'uploads';
-                
-        $filename = $file->move($destinationPath,$file->getClientOriginalName());
-        $input = array('name'=>$name,'description'=>$description,'doc'=> $filename);
-        
-        }
-        
-        else {
-            
+            $destinationPath = 'uploads';
+
+            $filename = $file->move($destinationPath, $file->getClientOriginalName());
+            $input = ['name'=>$name, 'description'=>$description, 'doc'=> $filename];
+        } else {
             $input = $request->all($id);
-            
         }
 
-            if($this->note->update($id,$input)){
-                return response()->json(['message' => 'Note updated', 'code' =>200],200 );            
- 
-            }else{
-              return response()->json(['message' => 'couldnt update','code'=>404] );
-            }
-
+        if ($this->note->update($id, $input)) {
+            return response()->json(['message' => 'Note updated', 'code' =>200], 200);
+        } else {
+            return response()->json(['message' => 'couldnt update', 'code'=>404]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-
-    public function destroy($id) {
-
+    public function destroy($id)
+    {
         $remove = $this->note->destroy($id);
-        
-        if($remove) {
 
-           return response()->json(['message' => 'Note deleted', 'code' =>200],200 );
-
+        if ($remove) {
+            return response()->json(['message' => 'Note deleted', 'code' =>200], 200);
+        } else {
+            return response()->json(['message' => 'Couldnt delete note', 'code'=>404]);
         }
-      
-        else {
-            
-            return response()->json(['message' => 'Couldnt delete note','code'=>404] );
-            
-        }
-
     }
-
-    
 }

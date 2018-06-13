@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAccountTable extends Migration
 {
@@ -15,15 +15,15 @@ class CreateAccountTable extends Migration
     {
         Schema::create('account', function (Blueprint $table) {
             $table->increments('id');
-			$table->integer('country_id')->unsigned()->nullable();
-			$table->integer('user_id')->unsigned()->nullable();
-			$table->string('name');
-			$table->string('description');
-			$table->string('street');
-			$table->string('city');
-			$table->string('country');
-			$table->string('zip');
-			$table->string('phone');
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->string('name');
+            $table->string('description');
+            $table->string('street');
+            $table->string('city');
+            $table->string('country');
+            $table->string('zip');
+            $table->string('phone');
             $table->timestamps();
         });
     }

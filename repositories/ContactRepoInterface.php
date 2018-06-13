@@ -1,17 +1,16 @@
-<?php 
+<?php
 
 namespace repositories;
 
-interface ContactRepoInterface {
-	
+interface ContactRepoInterface
+{
     public function selectAll();
 
-    public function getbyId($id=null);
-	
-    public function edit($id=null);
-	
-    public function update($id=null,array $data);
-	
+    public function getbyId($id = null);
+
+    public function edit($id = null);
+
+    public function update($id, array $data);
+
     public function destroy($id);
-	
 }

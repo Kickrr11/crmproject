@@ -1,140 +1,111 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Collective\Html\FormFacade;
 use Illuminate\Support\Facades\View;
-use Validator, Input, Redirect; 
+use Input;
+use Redirect;
 use repositories\AccountRepoInterface;
+use Validator;
 
 class AccountController extends Controller
 {
-
     private $account;
 
-    public function __construct(AccountRepoInterface $account )
+    public function __construct(AccountRepoInterface $account)
     {
-        $this->account=$account;
+        $this->account = $account;
     }
-    
-    
+
     public function index()
     {
-        
         $accounts = $this->account->selectAll();
-        
-        return View::make('accounts', ['accounts'=>$accounts]);        
+
+        return View::make('accounts', ['accounts'=>$accounts]);
     }
-    
-    public function show ($id)
+
+    public function show($id)
     {
-        return View::make('accountsview')   
-           ->with('contact', $this->account->contacts($id) )
+        return View::make('accountsview')
+           ->with('contact', $this->account->contacts($id))
            ->with('note', $this->account->notes($id))
-           ->with ('account', $this->account->getbyId($id));      
+           ->with('account', $this->account->getbyId($id));
     }
 
-    public function create($id=null)
+    public function create($id = null)
     {
-
-	return View::make ('newaccount')
-	->with('title', 'New Account')
-	->with('country', $this->account->create($id)->sortBy('name'));
+        return View::make('newaccount')
+    ->with('title', 'New Account')
+    ->with('country', $this->account->create($id)->sortBy('name'));
     }
-    
 
     public function store(Request $request)
     {
-        
         $v = Validator::make($request->all(), [
-            
-            'name' => 'required',
-            'description' => 'required'
-            		
+
+            'name'        => 'required',
+            'description' => 'required',
+
             ]);
-		
-	if ($v->fails())
-        {
-			
-            return Redirect::back ()->withErrors($v);
-		
-	} else  {
-		
-           $input = $request->all();
-           
-           $this->account->store ($input);
- 
-        return redirect('accounts')->with('status', 'Account created!');
 
+        if ($v->fails()) {
+            return Redirect::back()->withErrors($v);
+        } else {
+            $input = $request->all();
+
+            $this->account->store($input);
+
+            return redirect('accounts')->with('status', 'Account created!');
         }
-	
     }
-    
-    public function edit ($id) 
+
+    public function edit($id)
     {
-        
         $account = $this->account->getbyId($id);
-         return View::make ('accountedit')->with('account',$account); 
-        
+
+        return View::make('accountedit')->with('account', $account);
     }
-   
-    public function update (Request $request,$id=null)
+
+    public function update(Request $request, $id = null)
     {
- 
-        $input=$request->all();
+        $input = $request->all();
 
-        if ($this->account ->update($id,$input)) {
-            
-            return redirect()->route('accounts',$id)->with('status', 'Account updated!');
-
-        }
-        else{
-               return array('status'=>'Could not update!');
-            }
-            
-        return array('status'=>'Could not find Account!');
-        
+        if ($this->account->update($id, $input)) {
+            return redirect()->route('accounts', $id)->with('status', 'Account updated!');
+        } else {
+            return ['status'=>'Could not update!'];
         }
 
-    public function destroy(Request $request,$id=null) 
+        return ['status'=>'Could not find Account!'];
+    }
+
+    public function destroy(Request $request, $id = null)
     {
-        
         $id = $request->input('accountid');
-        
-        $remove=$this->account->destroy($id);
-        
-        if($remove) {
-            
-           return redirect('accounts')->with('status', 'Account deleted!');
 
+        $remove = $this->account->destroy($id);
+
+        if ($remove) {
+            return redirect('accounts')->with('status', 'Account deleted!');
         } else {
-
-            return array('status'=>'Could not delete!');
+            return ['status'=>'Could not delete!'];
         }
-        
     }
-  
-    public function search ()
+
+    public function search()
     {
+        $query = Input::get('query', '');
 
-        $query = Input::get('query','');  
-        
-        if($query) {
+        if ($query) {
+            $accounts = $this->account->search($query);
 
-        $accounts = $this->account->search($query);
-
-        $accounts->getAggregations();
-
+            $accounts->getAggregations();
         } else {
-        // Show all posts if no query is set
-        $accounts = $this->account->selectAll(); 
-
+            // Show all posts if no query is set
+            $accounts = $this->account->selectAll();
         }
 
-        return View::make('accountssearch')->with('accounts',$accounts);
-
+        return View::make('accountssearch')->with('accounts', $accounts);
     }
-
 }
